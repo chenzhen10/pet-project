@@ -9,35 +9,41 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
+
 @Service
 public class PostServiceImpl implements PostService {
 
+//    @Autowired
+//    private ElasticPostRepository repository;
+
     @Autowired
-    private PostRepository repository;
+    private PostRepository postRepository;
 
     @Transactional(readOnly = true)
     public Page<Post> getAll(Pageable pageable) {
-        return repository.findAll(pageable);
+        return postRepository.findAll(pageable);
     }
 
     @Transactional
     @Override
     public Long create(Post p) {
-        return repository.save(p).getId();
+        return postRepository.save(p).getId();
     }
 
     @Transactional
     @Override
     public void update(Long id,Post newPost ) {
-        Post post =  repository.findById(id).get();
+        Post post = postRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity was not found..."));
         post.setName(newPost.getName());
         post.setDate(newPost.getDate());
         post.setTag(newPost.getTag());
+        postRepository.save(post);
     }
 
     @Transactional
     @Override
     public void delete(Long id) {
-        repository.deleteById(id);
+        postRepository.deleteById(id);
     }
 }
