@@ -1,4 +1,4 @@
-package by.itechart.demo.controller;
+package by.itechart.demo.post.controller;
 
 
 import by.itechart.demo.post.model.Post;
@@ -14,7 +14,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/api/posts")
-public class WebController {
+public class PostController {
 
 
     @Autowired
