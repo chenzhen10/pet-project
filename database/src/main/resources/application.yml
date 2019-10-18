@@ -12,3 +12,25 @@ spring:
     show_sql: true
   main:
     allow-bean-definition-overriding: true
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+      cluster-nodes: localhost:9300
+      cluster-name: elasticsearch
+
+
+logging.file: logs/app.log
+
+
+logging:
+  file:
+    max-history: 20
+    max-size: 5MB
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"
+  level:
+    org.springframework: INFO
+    org.hibernate: INFO
+    by.itechart.demo: DEBUG

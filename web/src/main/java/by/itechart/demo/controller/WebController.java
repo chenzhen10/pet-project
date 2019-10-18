@@ -6,8 +6,6 @@ import by.itechart.demo.post.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +21,7 @@ public class WebController {
     private PostService postService;
 
     @GetMapping
-    public Page<Post> getAllPosts(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
+    public Page<Post> getAllPosts(Pageable pageable) {
         return postService.getAll(pageable);
     }
 

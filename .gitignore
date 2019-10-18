@@ -3,6 +3,7 @@
 *.log
 *.iml
 target/
+logs/
 
 # dependencies
 node_modules/
