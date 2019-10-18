@@ -27,7 +27,6 @@ public class UserDetailsServices implements UserDetailsService {
         return build(usr);
     }
 
-
     private static UserPrinciple build(User user) {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>() {{
             add(new SimpleGrantedAuthority(user.getRole()));

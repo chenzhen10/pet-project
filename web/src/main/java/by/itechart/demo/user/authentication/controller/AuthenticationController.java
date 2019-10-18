@@ -1,6 +1,9 @@
 package by.itechart.demo.user.authentication.controller;
 
 
+import by.itechart.demo.security.UserPrinciple;
+import by.itechart.demo.security.jwt.JwtProvider;
+import by.itechart.demo.security.jwt.model.JwtResponse;
 import by.itechart.demo.user.model.User;
 import by.itechart.demo.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +20,16 @@ import java.util.List;
 @RequestMapping("/api/authenticate")
 public class AuthenticationController {
 
+
+    @Autowired
+    private JwtProvider jwtProvider;
+
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
-
     @Autowired
     private UserRepository userRepository;
-
-
-
 
     @PostMapping
     public ResponseEntity<?> authenticateUser(@RequestBody User user) {
@@ -35,11 +39,15 @@ public class AuthenticationController {
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return ResponseEntity.ok("Logged in");
+
+        String jwt = jwtProvider.generateJwtToken(user.getUserName());
+        UserPrinciple userDetails = (UserPrinciple) authentication.getPrincipal();
+
+        return ResponseEntity.ok(new JwtResponse(jwt,userDetails.getAuthorities()));
     }
 
     @GetMapping
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 

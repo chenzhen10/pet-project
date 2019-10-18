@@ -34,3 +34,7 @@ logging:
     org.springframework: INFO
     org.hibernate: INFO
     by.itechart.demo: DEBUG
+
+jwt:
+  secret: demo
+  validity: 36000
