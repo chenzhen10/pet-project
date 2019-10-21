@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -25,7 +26,7 @@ public class UserController {
     private UserRepository repository;
 
     @PostMapping("registration")
-    public ResponseEntity<?> registerUser(@RequestBody CreateUserDto newUser){
+    public ResponseEntity<?> registerUser(@Valid @RequestBody CreateUserDto newUser){
         Long id = userService.register(newUser).getId();
         URI uri = URI.create(String.valueOf(id));
         return ResponseEntity.created(uri).build();
