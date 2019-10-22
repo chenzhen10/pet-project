@@ -1,12 +1,11 @@
 package by.itechart.demo.user.dto;
 
-import by.itechart.demo.common.annotation.validation.username.UniqueUsername;
+import by.itechart.demo.user.annotation.validation.username.UniqueUsername;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor
@@ -14,8 +13,7 @@ import javax.validation.constraints.Min;
 public class CreateUserDto {
 
     @UniqueUsername
-    @Min(value = 6, message = "Min value should be greater then 6")
-    @Max(value = 40, message = "Max value should be less then 40")
+    @Size(max = 40,min = 6, message = "Min value should be greater then 6 and Max value should be less then 40")
     private String userName;
     private String password;
     private String role;
