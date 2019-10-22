@@ -10,20 +10,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserDetailsServices implements UserDetailsService {
 
-    //user repository
+
     @Autowired
     private UserRepository userRepository;
 
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User usr = userRepository.findByUserName(s);
+        User usr = userRepository.findByUserName(s).orElseThrow(() -> new EntityNotFoundException("Entity not found"));
         return build(usr);
     }
 
