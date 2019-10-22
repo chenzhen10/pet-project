@@ -14,6 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -31,7 +33,10 @@ public class UniqueUsernameTest {
 
     @Test
     public void saveUserThenTryToRetrieveIt() {
-        User user = User.builder().userName("John").password("test").role(Role.Anonym).build();
+        List<Role> roles = new ArrayList<>();
+        roles.add(Role.Anonym);
+        roles.add(Role.User);
+        User user = User.builder().userName("John").password("test").role(roles).build();
         Long id = userRepository.save(user).getId();
         Optional<User> foundUser = userRepository.findById(id);
 

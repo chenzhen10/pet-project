@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 
 @Service
@@ -35,7 +36,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void assignRoles(Long id, Role role) {
+    public void assignRole(Long id, List<Role> role) {
         User usr = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found ..."));
         usr.setRole(role);
         repository.save(usr);
