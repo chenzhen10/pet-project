@@ -1,4 +1,4 @@
-package by.itechart.demo.common.config;
+package by.itechart.demo.configuration;
 
 import by.itechart.demo.post.dto.CreatePostDto;
 import by.itechart.demo.post.model.Post;

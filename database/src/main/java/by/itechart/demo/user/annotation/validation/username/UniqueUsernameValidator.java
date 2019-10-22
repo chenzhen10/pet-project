@@ -1,4 +1,4 @@
-package by.itechart.demo.common.annotation.validation.username;
+package by.itechart.demo.user.annotation.validation.username;
 
 import by.itechart.demo.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
