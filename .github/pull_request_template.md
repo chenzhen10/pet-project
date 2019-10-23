@@ -1,3 +1,6 @@
+# Ticket
+- https://trello.com/c/tnpobQHe/33-bp-14github-templates
+
 # Titile of branch
 - BP-14: Introduce pull request template
 
