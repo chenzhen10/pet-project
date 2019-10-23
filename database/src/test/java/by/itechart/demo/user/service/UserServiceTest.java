@@ -1,11 +1,14 @@
-package by.itechart.demo.user.repository;
+package by.itechart.demo.user.service;
 
 
 import by.itechart.demo.common.configuration.UserJpaConfig;
+import by.itechart.demo.user.model.Role;
 import by.itechart.demo.user.model.User;
+import by.itechart.demo.user.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -20,18 +23,19 @@ import static org.junit.Assert.assertEquals;
 @ContextConfiguration(
         classes = {UserJpaConfig.class},
         loader = AnnotationConfigContextLoader.class)
+@PropertySource("application-test.properties")
 @Transactional
 @ActiveProfiles("test")
-public class UniqueUsernameTest {
+public class UserServiceTest {
 
     @Autowired
     private UserRepository userRepository;
 
     @Test
-    public void saveUserThenTryToRetrieveIt() {
-        User user = new User(null, "John", "Blake", "Admin");
-        userRepository.save(user);
-        Optional<User> foundUser = userRepository.findById(1L);
+    public void testSaveUser() {
+        User user = User.builder().userName("John").password("test").role(Role.Anonym).build();
+        Long id =  userRepository.save(user).getId();
+        Optional<User> foundUser = userRepository.findById(id);
 
         String expected = "John";
         String result = foundUser.get().getUserName();
