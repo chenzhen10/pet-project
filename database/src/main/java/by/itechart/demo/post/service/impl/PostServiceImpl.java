@@ -17,8 +17,6 @@ import javax.persistence.EntityNotFoundException;
 @Service
 public class PostServiceImpl implements PostService {
 
-//    @Autowired
-//    private ElasticPostRepository repository;
 
     @Autowired
     private ModelMapper mapper;

@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 public interface PostService {
     Page<PostDto> getAll(Pageable pageable);
     Long create(CreatePostDto p);
-    //??
     void update(Long id,CreatePostDto newPost);
     void delete(Long id);
 }

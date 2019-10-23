@@ -2,7 +2,6 @@ package by.itechart.demo.user.controller;
 
 
 import by.itechart.demo.user.dto.CreateUserDto;
-import by.itechart.demo.user.repository.UserRepository;
 import by.itechart.demo.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +21,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserRepository repository;
 
     @PostMapping("registration")
     public ResponseEntity<?> registerUser(@Valid @RequestBody CreateUserDto newUser){
