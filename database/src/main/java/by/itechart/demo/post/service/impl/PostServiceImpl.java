@@ -17,8 +17,6 @@ import javax.persistence.EntityNotFoundException;
 @Service
 public class PostServiceImpl implements PostService {
 
-//    @Autowired
-//    private ElasticPostRepository repository;
 
     @Autowired
     private ModelMapper mapper;
@@ -52,4 +50,7 @@ public class PostServiceImpl implements PostService {
     public void delete(Long id) {
         postRepository.deleteById(id);
     }
+
+
+
 }

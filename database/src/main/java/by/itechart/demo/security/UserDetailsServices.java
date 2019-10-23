@@ -30,7 +30,7 @@ public class UserDetailsServices implements UserDetailsService {
 
     private static UserPrinciple build(User user) {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>() {{
-            add(new SimpleGrantedAuthority(user.getRole()));
+            add(new SimpleGrantedAuthority(user.getRole().name()));
         }};
         return new UserPrinciple(
                 user.getId(),
