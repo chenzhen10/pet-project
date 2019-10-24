@@ -61,4 +61,6 @@ public class UserJpaConfig {
         hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         return hibernateProperties;
     }
+
 }
+

@@ -50,4 +50,7 @@ public class PostServiceImpl implements PostService {
     public void delete(Long id) {
         postRepository.deleteById(id);
     }
+
+
+
 }
