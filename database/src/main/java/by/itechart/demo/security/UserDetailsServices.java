@@ -25,7 +25,7 @@ public class UserDetailsServices implements UserDetailsService {
     private static UserPrinciple build(User user) {
         List<Role> roles = user.getRole();
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>() {{
-            roles.forEach(role -> add(new SimpleGrantedAuthority(role.name())));
+            add(new SimpleGrantedAuthority(user.getRole().toString()));
         }};
         return new UserPrinciple(
                 user.getId(),

@@ -1,5 +1,6 @@
 package by.itechart.demo.common.configuration;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +17,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
-
 
 @Configuration
 @EnableJpaRepositories(basePackages = "by.itechart.demo")
@@ -61,4 +61,6 @@ public class UserJpaConfig {
         hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         return hibernateProperties;
     }
+
 }
+
