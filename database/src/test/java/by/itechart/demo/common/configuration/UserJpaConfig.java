@@ -1,5 +1,6 @@
 package by.itechart.demo.common.configuration;
 
+
 import by.itechart.demo.post.dto.CreatePostDto;
 import by.itechart.demo.post.model.Post;
 import by.itechart.demo.user.dto.CreateUserDto;
@@ -8,6 +9,10 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -20,6 +25,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
+
 
 
 @Configuration
@@ -67,6 +73,7 @@ public class UserJpaConfig {
         return hibernateProperties;
     }
 
+
     @Bean
     public ModelMapper modelMapper(){
         ModelMapper mapper = new ModelMapper();
@@ -85,3 +92,4 @@ public class UserJpaConfig {
         return new BCryptPasswordEncoder();
     }
 }
+
