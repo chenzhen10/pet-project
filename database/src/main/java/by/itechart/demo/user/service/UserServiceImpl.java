@@ -1,6 +1,7 @@
 package by.itechart.demo.user.service;
 
 import by.itechart.demo.user.dto.CreateUserDto;
+import by.itechart.demo.user.dto.UserDto;
 import by.itechart.demo.user.model.Role;
 import by.itechart.demo.user.model.User;
 import by.itechart.demo.user.repository.UserRepository;
@@ -39,6 +40,12 @@ public class UserServiceImpl implements UserService {
         User usr = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found ..."));
         usr.setRole(role);
         repository.save(usr);
+    }
+
+    @Override
+    public UserDto getUser(Long id) {
+        User user = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found ..."));
+        return mapper.map(user,UserDto.class);
     }
 
 }

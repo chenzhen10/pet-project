@@ -2,6 +2,8 @@ package by.itechart.demo.user.service;
 
 
 import by.itechart.demo.common.configuration.UserJpaConfig;
+import by.itechart.demo.user.dto.CreateUserDto;
+import by.itechart.demo.user.dto.UserDto;
 import by.itechart.demo.user.model.Role;
 import by.itechart.demo.user.model.User;
 import by.itechart.demo.user.repository.UserRepository;
@@ -27,16 +29,27 @@ import static org.junit.Assert.assertEquals;
 public class UniqueUsernameTest {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
+
 
     @Test
     public void saveUserThenTryToRetrieveIt() {
-        User user = User.builder().userName("John").password("test").role(Role.Anonym).build();
-        Long id = userRepository.save(user).getId();
-        Optional<User> foundUser = userRepository.findById(id);
+        String userName = "John";
+        CreateUserDto user = userWithFirsNameAndPassword(userName,"test");
 
-        String expected = "John";
-        String result = foundUser.get().getUserName();
-        assertEquals(expected, result);
+        Long id = userService.register(user).getId();
+        UserDto foundUser = userService.getUser(id);
+
+        assertEquals(userName, foundUser.getUserName());
     }
+
+
+
+    private CreateUserDto userWithFirsNameAndPassword(String name, String password) {
+        CreateUserDto mockUser = new CreateUserDto();
+        mockUser.setUserName(name);
+        mockUser.setPassword(password);
+        return mockUser;
+    }
+
 }
