@@ -1,6 +1,7 @@
 package by.itechart.demo.user.service;
 
-import by.itechart.demo.common.configuration.UserJpaConfig;
+
+import by.itechart.demo.configuration.UserJpaConfig;
 import by.itechart.demo.user.dto.CreateUserDto;
 import by.itechart.demo.user.dto.UserDto;
 import org.junit.Test;
@@ -31,13 +32,13 @@ public class UserServiceImplTest {
 
     @Test
     public void testUserRegistration() {
-        CreateUserDto user = userWithFirsNameAndPassword("John", "test");
-        Long id = userService.register(user).getId();
-        UserDto dto = userService.getUser(id);
+        String username = "John";
+        CreateUserDto user = userWithFirsNameAndPassword(username, "test");
 
-        String expected = "John";
-        String result = dto.getUserName();
-        assertEquals(expected, result);
+        Long id = userService.register(user).getId();
+        UserDto foundUser = userService.getUser(id);
+
+        assertEquals(username, foundUser.getUserName());
     }
 
 

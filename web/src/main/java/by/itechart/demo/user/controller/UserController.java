@@ -34,13 +34,13 @@ public class UserController {
 
     @PutMapping("{id}/roles/assign")
     public ResponseEntity<?> assignRole(@PathVariable Long id, @RequestBody List<Role> role) {
-        userService.assignRole(id, role);
+        userService.assignRoles(id, role);
         return ResponseEntity.ok("Updated role");
     }
 
     @PutMapping("{id}/roles/delete")
     public ResponseEntity<?> deleteRole(@PathVariable Long id) {
-        userService.assignRole(id, Collections.singletonList(Role.Anonym));
+        userService.assignRoles(id, Collections.singletonList(Role.Anonym));
         return ResponseEntity.ok("Role deleted");
     }
 

@@ -1,6 +1,7 @@
 package by.itechart.demo.user.annotation.validation.username;
 
-import by.itechart.demo.user.repository.UserRepository;
+
+import by.itechart.demo.user.repository.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;

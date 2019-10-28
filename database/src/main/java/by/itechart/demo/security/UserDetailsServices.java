@@ -2,7 +2,7 @@ package by.itechart.demo.security;
 
 import by.itechart.demo.user.model.Role;
 import by.itechart.demo.user.model.User;
-import by.itechart.demo.user.repository.UserRepository;
+import by.itechart.demo.user.repository.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

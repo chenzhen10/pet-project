@@ -9,10 +9,15 @@ import org.modelmapper.TypeMap;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
 
 
 @Configuration
 @ComponentScan("by.itechart.demo")
+@EnableJpaRepositories("by.itechart.demo.*.repository.jpa")
+@EnableElasticsearchRepositories("by.itechart.demo.*.repository.elastic")
 public class CoreConfiguration  {
 
     @Bean

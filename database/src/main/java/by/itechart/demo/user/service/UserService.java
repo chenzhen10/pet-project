@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserService {
 
     User register(CreateUserDto newUser);
-    void assignRole(Long id, List<Role> role);
-    UserDto getUser(Long id);
 
+    void assignRoles(Long id, List<Role> role);
+    UserDto getUser(Long id);
 }

@@ -15,4 +15,5 @@ public class CreatePostDto {
     private String name;
     private Date date;
     private String tag;
+    private String body;
 }

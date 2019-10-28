@@ -24,6 +24,7 @@ public class User {
     private String userName;
     private String password;
 
+
     @ElementCollection(targetClass = Role.class)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "id"))
     @Enumerated(EnumType.STRING)
