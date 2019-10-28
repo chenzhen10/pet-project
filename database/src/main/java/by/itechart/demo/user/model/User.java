@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -24,6 +25,8 @@ public class User {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    @ElementCollection(targetClass = Role.class)
+    @JoinTable(name = "user_roles",joinColumns = @JoinColumn(name = "id"))
+    private List<Role> role;
 
 }

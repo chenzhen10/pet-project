@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
@@ -28,14 +30,14 @@ public class UserController {
     }
 
     @PutMapping("{id}/roles/assign")
-    public ResponseEntity<?> assignRole(@PathVariable Long id, @RequestBody Role role) {
+    public ResponseEntity<?> assignRole(@PathVariable Long id, @RequestBody List<Role> role) {
         userService.assignRoles(id, role);
         return ResponseEntity.ok("Updated role");
     }
 
     @PutMapping("{id}/roles/delete")
     public ResponseEntity<?> deleteRole(@PathVariable Long id) {
-        userService.assignRoles(id, Role.Anonym);
+        userService.assignRoles(id, Collections.singletonList(Role.Anonym));
         return ResponseEntity.ok("Role deleted");
     }
 

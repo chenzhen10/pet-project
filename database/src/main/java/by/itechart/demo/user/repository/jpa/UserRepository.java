@@ -1,4 +1,4 @@
-package by.itechart.demo.user.repository;
+package by.itechart.demo.user.repository.jpa;
 
 
 import by.itechart.demo.user.model.User;

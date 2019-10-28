@@ -1,4 +1,4 @@
-package by.itechart.demo.common.annotation.validation.username;
+package by.itechart.demo.user.annotation.validation.username;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

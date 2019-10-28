@@ -1,4 +1,4 @@
-package by.itechart.demo.common.configuration;
+package by.itechart.demo.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package by.itechart.demo.common.config;
+package by.itechart.demo.configuration;
 
 import by.itechart.demo.security.UserDetailsServices;
 import by.itechart.demo.security.jwt.filter.JwtTokenFilter;
@@ -38,8 +38,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
         registry.addMapping("/**").allowedOrigins("*").allowedMethods("*");
     }
 
-
-    //it's default ?
 
 
     @Bean

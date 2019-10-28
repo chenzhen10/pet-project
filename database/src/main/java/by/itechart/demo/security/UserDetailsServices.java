@@ -1,7 +1,7 @@
 package by.itechart.demo.security;
 
 import by.itechart.demo.user.model.User;
-import by.itechart.demo.user.repository.UserRepository;
+import by.itechart.demo.user.repository.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,7 +30,7 @@ public class UserDetailsServices implements UserDetailsService {
 
     private static UserPrinciple build(User user) {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>() {{
-            add(new SimpleGrantedAuthority(user.getRole().name()));
+          user.getRole().forEach(role -> add(new SimpleGrantedAuthority(role.name())));
         }};
         return new UserPrinciple(
                 user.getId(),

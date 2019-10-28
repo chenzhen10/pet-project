@@ -1,4 +1,4 @@
-package by.itechart.demo.post.repository;
+package by.itechart.demo.post.repository.jpa;
 
 import by.itechart.demo.post.model.Post;
 import org.springframework.data.jpa.repository.JpaRepository;

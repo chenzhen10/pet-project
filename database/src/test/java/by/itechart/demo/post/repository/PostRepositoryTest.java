@@ -1,6 +1,6 @@
 package by.itechart.demo.post.repository;
 
-import by.itechart.demo.common.configuration.UserJpaConfig;
+import by.itechart.demo.configuration.UserJpaConfig;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
