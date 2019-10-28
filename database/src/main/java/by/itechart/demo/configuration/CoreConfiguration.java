@@ -13,6 +13,7 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
+
 @Configuration
 @ComponentScan("by.itechart.demo")
 @EnableJpaRepositories("by.itechart.demo.*.repository.jpa")

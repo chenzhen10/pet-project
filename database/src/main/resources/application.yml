@@ -43,4 +43,7 @@ logging:
 
 jwt:
   secret: demo
+
   validity: 36000
+
+

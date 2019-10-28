@@ -37,6 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
+
     public void assignRoles(Long id, List<Role> role) {
         User usr = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found ..."));
         usr.setRole(role);
@@ -48,5 +49,4 @@ public class UserServiceImpl implements UserService {
         User user = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found ..."));
         return mapper.map(user,UserDto.class);
     }
-
 }

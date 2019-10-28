@@ -4,6 +4,7 @@ package by.itechart.demo.user.controller;
 import by.itechart.demo.user.dto.CreateUserDto;
 import by.itechart.demo.user.model.Role;
 import by.itechart.demo.user.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@Slf4j
 public class UserController {
 
 
@@ -24,6 +26,7 @@ public class UserController {
 
     @PostMapping("registration")
     public ResponseEntity<?> registerUser(@Valid @RequestBody CreateUserDto newUser) {
+        log.debug("New user created {}",newUser);
         Long id = userService.register(newUser).getId();
         URI uri = URI.create(String.valueOf(id));
         return ResponseEntity.created(uri).build();

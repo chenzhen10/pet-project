@@ -8,12 +8,16 @@ import by.itechart.demo.post.repository.jpa.PostRepository;
 import by.itechart.demo.post.service.PostService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -31,6 +35,11 @@ public class PostServiceImpl implements PostService {
     @Transactional(readOnly = true)
     public Page<PostDto> getAll(Pageable pageable) {
         Page<Post> posts = jpaRepository.findAll(pageable);
+        if (posts.getSize() == 0) {
+          DevConfiguration dev = new DevConfiguration();
+          dev.populateDate();
+        }
+
         return posts.map(post -> mapper.map(post, PostDto.class));
     }
 
