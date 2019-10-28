@@ -33,14 +33,27 @@ public class UniqueUsernameTest {
 
 
     @Test
+
     public void saveUserThenTryToRetrieveIt() {
         String userName = "John";
-        CreateUserDto user = userWithFirsNameAndPassword(userName,"test");
+        CreateUserDto user = userWithFirsNameAndPassword(userName, "test");
 
         Long id = userService.register(user).getId();
         UserDto foundUser = userService.getUser(id);
 
+
         assertEquals(userName, foundUser.getUserName());
+    }
+
+    public void testUserRegistration() {
+        String username = "John";
+        CreateUserDto user = userWithFirsNameAndPassword(username, "test");
+
+        Long id = userService.register(user).getId();
+        UserDto foundUser = userService.getUser(id);
+
+        assertEquals(username, foundUser.getUserName());
+
     }
 
 
