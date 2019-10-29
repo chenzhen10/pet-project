@@ -3,7 +3,6 @@ package by.itechart.demo.post.controller;
 
 import by.itechart.demo.post.dto.CreatePostDto;
 import by.itechart.demo.post.dto.PostDto;
-import by.itechart.demo.post.repository.elastic.PostElasticRepository;
 import by.itechart.demo.post.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,6 +26,11 @@ public class PostController {
         return postService.getAll(pageable);
     }
 
+    @GetMapping("/search")
+    public Iterable<PostDto> searchPost(@RequestParam String word) {
+        return postService.search(word);
+    }
+
     @PostMapping
     public ResponseEntity<CreatePostDto> createPost(@RequestBody CreatePostDto p) {
         Long id = postService.create(p);
@@ -41,8 +45,8 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updatePost(@PathVariable Long id ,@RequestBody CreatePostDto p) {
-        postService.update(id,p);
+    public ResponseEntity<String> updatePost(@PathVariable Long id, @RequestBody CreatePostDto p) {
+        postService.update(id, p);
         return ResponseEntity.ok(id.toString());
     }
 

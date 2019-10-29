@@ -11,4 +11,5 @@ public interface PostService {
     Long create(CreatePostDto p);
     void update(Long id,CreatePostDto newPost);
     void delete(Long id);
+    Iterable<PostDto> search(String word);
 }

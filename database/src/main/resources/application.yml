@@ -39,6 +39,7 @@ logging:
     org.springframework: INFO
     org.hibernate: INFO
     by.itechart.demo: DEBUG
+    org.springframework.data.elasticsearch.core: DEBUG
 
 jwt:
   secret: demo

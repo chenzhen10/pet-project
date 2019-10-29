@@ -7,6 +7,7 @@ import by.itechart.demo.post.model.Post;
 import by.itechart.demo.post.repository.elastic.PostElasticRepository;
 import by.itechart.demo.post.repository.jpa.PostRepository;
 import by.itechart.demo.post.service.PostService;
+import org.elasticsearch.common.unit.Fuzziness;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+
+import static org.elasticsearch.index.query.QueryBuilders.fuzzyQuery;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -33,8 +36,8 @@ public class PostServiceImpl implements PostService {
     public Page<PostDto> getAll(Pageable pageable) {
         Page<Post> posts = jpaRepository.findAll(pageable);
         if (posts.getSize() == 0) {
-          DevConfiguration dev = new DevConfiguration();
-          dev.populateDate(jpaRepository);
+            DevConfiguration dev = new DevConfiguration();
+            dev.populateDate(jpaRepository);
         }
 
         return posts.map(post -> mapper.map(post, PostDto.class));
@@ -44,7 +47,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Long create(CreatePostDto p) {
         Post post = mapper.map(p, Post.class);
-        Post newPost =  jpaRepository.save(post);
+        Post newPost = jpaRepository.save(post);
         return elasticRepository.save(newPost).getId();
     }
 
@@ -64,6 +67,14 @@ public class PostServiceImpl implements PostService {
         elasticRepository.deleteById(id);
     }
 
+    @Override
+    public Iterable<PostDto> search(String parameter) {
+        Page<Post> posts = (Page<Post>) elasticRepository
+                .search(fuzzyQuery("body", parameter.toLowerCase())
+                        .fuzziness(Fuzziness.TWO)
+                        .transpositions(true));
+        return posts.map(post -> mapper.map(post, PostDto.class));
+    }
 
 
 }
