@@ -1,10 +1,11 @@
-package by.itechart.demo.user.service;
+package by.itechart.demo.user.service.impl;
 
 import by.itechart.demo.user.dto.CreateUserDto;
 import by.itechart.demo.user.dto.UserDto;
 import by.itechart.demo.user.model.Role;
 import by.itechart.demo.user.model.User;
 import by.itechart.demo.user.repository.jpa.UserRepository;
+import by.itechart.demo.user.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -48,5 +49,4 @@ public class UserServiceImpl implements UserService {
         User user = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found ..."));
         return mapper.map(user,UserDto.class);
     }
-
 }
