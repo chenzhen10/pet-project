@@ -4,7 +4,7 @@
 *.iml
 target/
 logs/
-
+*.patch
 # dependencies
 node_modules/
 /.pnp

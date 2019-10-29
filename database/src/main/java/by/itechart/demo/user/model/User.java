@@ -28,6 +28,4 @@ public class User {
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "id"))
     @Enumerated(EnumType.STRING)
     private List<Role> role;
-
-
 }

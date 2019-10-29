@@ -3,16 +3,21 @@ package by.itechart.demo.post.service.impl;
 import by.itechart.demo.post.dto.CreatePostDto;
 import by.itechart.demo.post.dto.PostDto;
 import by.itechart.demo.post.model.Post;
-import by.itechart.demo.post.repository.PostRepository;
+import by.itechart.demo.post.repository.elastic.PostElasticRepository;
+import by.itechart.demo.post.repository.jpa.PostRepository;
 import by.itechart.demo.post.service.PostService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -22,11 +27,19 @@ public class PostServiceImpl implements PostService {
     private ModelMapper mapper;
 
     @Autowired
-    private PostRepository postRepository;
+    private PostRepository jpaRepository;
+
+    @Autowired
+    private PostElasticRepository elasticRepository;
 
     @Transactional(readOnly = true)
     public Page<PostDto> getAll(Pageable pageable) {
-        Page<Post> posts = postRepository.findAll(pageable);
+        Page<Post> posts = jpaRepository.findAll(pageable);
+        if (posts.getSize() == 0) {
+          DevConfiguration dev = new DevConfiguration();
+          dev.populateDate();
+        }
+
         return posts.map(post -> mapper.map(post, PostDto.class));
     }
 
@@ -34,21 +47,24 @@ public class PostServiceImpl implements PostService {
     @Override
     public Long create(CreatePostDto p) {
         Post post = mapper.map(p, Post.class);
-        return postRepository.save(post).getId();
+        Post newPost =  jpaRepository.save(post);
+        return elasticRepository.save(newPost).getId();
     }
 
     @Transactional
     @Override
     public void update(Long id, CreatePostDto newPost) {
-        Post post = postRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity was not found..."));
+        Post post = jpaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity was not found..."));
         mapper.map(newPost, post);
-        postRepository.save(post);
+        jpaRepository.save(post);
+        elasticRepository.save(post);
     }
 
     @Transactional
     @Override
     public void delete(Long id) {
-        postRepository.deleteById(id);
+        jpaRepository.deleteById(id);
+        elasticRepository.deleteById(id);
     }
 
 

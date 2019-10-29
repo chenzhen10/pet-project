@@ -3,6 +3,7 @@ package by.itechart.demo.post.controller;
 
 import by.itechart.demo.post.dto.CreatePostDto;
 import by.itechart.demo.post.dto.PostDto;
+import by.itechart.demo.post.repository.elastic.PostElasticRepository;
 import by.itechart.demo.post.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -1,4 +1,4 @@
-package by.itechart.demo.common.config;
+package by.itechart.demo.configuration;
 
 import by.itechart.demo.security.UserDetailsServices;
 import by.itechart.demo.security.jwt.filter.JwtTokenFilter;
@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
         registry.addMapping("/**").allowedOrigins("*").allowedMethods("*");
     }
 
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -55,6 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
         http.cors().and().csrf().disable().
                 authorizeRequests()
                 .antMatchers("/api/authenticate","/api/users/registration").permitAll()
+                .antMatchers("/api/authenticate","/api/users/registration","**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()

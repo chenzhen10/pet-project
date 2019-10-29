@@ -1,6 +1,7 @@
 package by.itechart.demo.user.dto;
 
-import by.itechart.demo.common.annotation.validation.username.UniqueUsername;
+
+import by.itechart.demo.user.annotation.validation.username.UniqueUsername;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
