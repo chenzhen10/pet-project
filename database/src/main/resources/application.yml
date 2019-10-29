@@ -1,7 +1,6 @@
 spring:
   profiles:
     active: "dev"
-
 ---
 spring:
   profiles: dev
@@ -43,4 +42,7 @@ logging:
 
 jwt:
   secret: demo
+
   validity: 36000
+
+

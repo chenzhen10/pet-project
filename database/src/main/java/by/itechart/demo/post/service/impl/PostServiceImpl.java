@@ -1,5 +1,6 @@
 package by.itechart.demo.post.service.impl;
 
+import by.itechart.demo.configuration.DevConfiguration;
 import by.itechart.demo.post.dto.CreatePostDto;
 import by.itechart.demo.post.dto.PostDto;
 import by.itechart.demo.post.model.Post;
@@ -31,6 +32,11 @@ public class PostServiceImpl implements PostService {
     @Transactional(readOnly = true)
     public Page<PostDto> getAll(Pageable pageable) {
         Page<Post> posts = jpaRepository.findAll(pageable);
+        if (posts.getSize() == 0) {
+          DevConfiguration dev = new DevConfiguration();
+          dev.populateDate(jpaRepository);
+        }
+
         return posts.map(post -> mapper.map(post, PostDto.class));
     }
 

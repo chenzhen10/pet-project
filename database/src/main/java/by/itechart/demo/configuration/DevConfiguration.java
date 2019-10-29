@@ -14,7 +14,7 @@ import java.util.List;
 public class DevConfiguration {
 
     @Profile("dev")
-    private void populateDate(PostRepository repository) {
+    public void populateDate(PostRepository repository) {
         List<Post> posts = new ArrayList<>();
         posts.add(Post.builder().name("Hotpost").date(new Date(2019, 5, 13))
                 .body("Since the beginning of the internet, millions and millions and millions of blogs have been created. " +

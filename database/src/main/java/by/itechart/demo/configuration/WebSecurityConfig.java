@@ -39,7 +39,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
     }
 
 
-
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -56,7 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
 
         http.cors().and().csrf().disable().
                 authorizeRequests()
-                .antMatchers("/api/authenticate").permitAll()
+                .antMatchers("/api/authenticate","/api/users/registration").permitAll()
+                .antMatchers("/api/authenticate","/api/users/registration","**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
