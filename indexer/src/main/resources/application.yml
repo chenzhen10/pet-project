@@ -1,0 +1,14 @@
+spring:
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+      cluster-nodes: localhost:9300
+      cluster-name: elasticsearch
+
+activemq:
+  broker-url: tcp://localhost:61616
+  destination: post.indexed
+
+server:
+  port : 8083
